@@ -10,8 +10,6 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "./screens/HomeScreen";
 import MapScreen from "./screens/MapScreen";
 
-// Google Directions API Key: AIzaSyAANj7dQAvBvAefe8PmfvOtfNL1SaHzU8A
-
 //left at 1:37:36 in video - Google Places Autocomplete
 
 // 1) Setting up redux
