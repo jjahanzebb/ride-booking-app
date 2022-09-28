@@ -10,7 +10,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "./screens/HomeScreen";
 import MapScreen from "./screens/MapScreen";
 
-//left at 1:37:36 in video - Google Places Autocomplete
+// 2:56:23
 
 // 1) Setting up redux
 

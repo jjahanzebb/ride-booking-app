@@ -10,6 +10,8 @@ import React from "react";
 import tw from "twrnc";
 import { Icon } from "@rneui/base";
 import { useNavigation } from "@react-navigation/native";
+import { useSelector } from "react-redux";
+import { selectOrigin } from "../slices/navSlice";
 
 const data = [
   {
@@ -28,6 +30,7 @@ const data = [
 
 const NavOptions = () => {
   const navigation = useNavigation();
+  const origin = useSelector(selectOrigin);
 
   return (
     <FlatList
@@ -37,24 +40,25 @@ const NavOptions = () => {
         <TouchableOpacity
           onPress={() => navigation.navigate(item.screen)}
           style={tw`p-2 pl-6 pb-8 pt-4 bg-gray-200 m-2 w-40`}
+          disabled={!origin}
         >
-          <View>
+          <View style={tw`${!origin && "opacity-40"}`}>
             <Image
               style={{ width: 120, height: 120, resizeMode: "contain" }}
               source={{ uri: item.image }}
             />
             <Text style={tw`mt-2 text-lg font-semibold`}>{item.title}</Text>
-          </View>
 
-          <Icon
-            style={tw`p-2 bg-black rounded-full w-10 mt-4`}
-            name="arrowright"
-            color="#fff"
-            type="antdesign"
-          />
+            <Icon
+              style={tw`p-2 bg-black rounded-full w-10 mt-4 `}
+              name="arrowright"
+              color="#fff"
+              type="antdesign"
+            />
+          </View>
         </TouchableOpacity>
       )}
-      horizontal
+      horizontal={true}
     />
   );
 };
