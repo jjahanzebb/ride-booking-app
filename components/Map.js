@@ -7,14 +7,21 @@ import tailwind from "twrnc";
 import { useRef } from "react";
 
 //to fetch/get/select origin values from redux
-import { useSelector } from "react-redux";
-import { selectDestination, selectOrigin } from "../slices/navSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectDestination,
+  selectOrigin,
+  setTravelTimeInformation,
+} from "../slices/navSlice";
 
 const Map = () => {
   const origin = useSelector(selectOrigin);
   const destination = useSelector(selectDestination);
 
   const mapRef = useRef(null);
+
+  const dispath = useDispatch();
+
   useEffect(() => {
     if (!origin || !destination) return;
 
@@ -24,6 +31,23 @@ const Map = () => {
       edgePadding: { top: 150, right: 150, bottom: 150, left: 150 },
     });
   }, [origin, destination]);
+
+  useEffect(() => {
+    if (!origin || !destination) return;
+
+    const getTravelTime = async () => {
+      fetch(
+        `https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${origin.description}&destinations=${destination.description}&key=${GOOGLE_MAPS_APIKEY}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          dispath(setTravelTimeInformation(data.rows[0].elements[0]));
+          console.log(data.rows[0].elements);
+        });
+    };
+
+    getTravelTime();
+  }, [origin, destination, GOOGLE_MAPS_APIKEY]);
 
   return (
     <MapView
