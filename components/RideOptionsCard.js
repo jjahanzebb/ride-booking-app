@@ -57,7 +57,7 @@ const RideOptionsCard = () => {
         <Text style={tailwind`text-center text-xl pb-5`}>
           Select a Ride -{" "}
           {Math.ceil(
-            setTravelTimeInformation?.distance.text.split(" ")[0] * 1.60934
+            setTravelTimeInformation?.distance?.text.split(" ")[0] * 1.60934
           ) + " km"}
         </Text>
       </View>
@@ -87,14 +87,14 @@ const RideOptionsCard = () => {
 
             <View style={tailwind`ml-3`}>
               <Text style={tailwind`text-xl font-semibold`}>{title}</Text>
-              <Text>{setTravelTimeInformation?.duration.text} travel</Text>
+              <Text>{setTravelTimeInformation?.duration?.text} travel</Text>
             </View>
 
             <Text style={tailwind`text-lg ml-12`}>
               Rs.
               {" " +
                 Math.ceil(
-                  (setTravelTimeInformation?.duration.value *
+                  (setTravelTimeInformation?.duration?.value *
                     SURGE_CHARGE_RATE *
                     multiplier) /
                     3
@@ -104,11 +104,10 @@ const RideOptionsCard = () => {
         )}
       />
 
-      <View
-        style={tailwind`flex-row bg-white justify-evenly mt-auto px-2 border-t border-gray-100`}
-      >
+      <View style={tailwind`mt-auto border-t border-gray-200`}>
         <TouchableOpacity
-          style={tailwind`w-full bg-black p-3 m-2 ${
+          disabled={!selected}
+          style={tailwind`w-full bg-black p-3 m-3 ${
             !selected && "bg-gray-300"
           }`}
         >
